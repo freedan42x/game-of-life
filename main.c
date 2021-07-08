@@ -13,10 +13,15 @@
 #define CELL_LIVE 1
 
 #define FRAME_RATE 240
-#define NEXT_GEN_INTERVAL 1/64
+#define NEXT_GEN_INTERVAL_MIN (1.0f / 64)
+#define NEXT_GEN_INTERVAL_MAX 1.0f
+#define NEXT_GEN_INTERVAL_STEP (1.0f / 32)
+#define NEXT_GEN_INTERVAL_INITIAL (1.0f / 2)
 
 #define CELL_COLOR BLACK
 #define BG_COLOR WHITE
+
+#define KEY_PLUS KEY_EQUAL
 
 #define W(s) mod(s, GRID_WIDTH)
 #define H(s) mod(s, GRID_HEIGHT)
@@ -78,6 +83,7 @@ int main()
 
   SetTargetFPS(FRAME_RATE);
 
+  float nextGenInterval = NEXT_GEN_INTERVAL_INITIAL;
   bool pause = true;
   int frame = 1;
   while (!WindowShouldClose())
@@ -87,9 +93,35 @@ int main()
       pause = !pause;
     }
 
+    if (IsKeyPressed(KEY_PLUS))
     {
+      if (nextGenInterval - NEXT_GEN_INTERVAL_STEP >= NEXT_GEN_INTERVAL_MIN)
+      {
+        nextGenInterval -= NEXT_GEN_INTERVAL_STEP;
+      }
+      frame = 1;
     }
 
+    if (IsKeyPressed('-'))
+    {
+      if (nextGenInterval + NEXT_GEN_INTERVAL_STEP <= NEXT_GEN_INTERVAL_MAX)
+      {
+	nextGenInterval += NEXT_GEN_INTERVAL_STEP;
+      }
+      frame = 1;
+    }
+
+    if (IsKeyPressed(KEY_R))
+    {
+      for (int x = 0; x < GRID_WIDTH; x++)
+      {
+	for (int y = 0; y < GRID_HEIGHT; y++)
+	{
+	  grid[x][y] = CELL_DEAD;
+	}
+      }
+    }
+    
     if (IsMouseButtonDown(MOUSE_LEFT_BUTTON) || IsMouseButtonDown(MOUSE_RIGHT_BUTTON))
     {
       Vector2 pos = GetMousePosition();
@@ -108,7 +140,7 @@ int main()
 
     if (!pause)
     {
-      if (frame == FRAME_RATE * NEXT_GEN_INTERVAL)
+      if (frame == (int) (FRAME_RATE * nextGenInterval))
       {
         CellsNextGen();
         frame = 1;
