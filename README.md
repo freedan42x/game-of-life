@@ -1,6 +1,6 @@
 # game-of-life
 
-Simple game using raylib
+Simple game using [raylib](https://github.com/raysan5/raylib)(Note: you have to build it on your own)
 
 ## Build
 ```console
