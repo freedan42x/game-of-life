@@ -1,5 +1,6 @@
 #include <raylib.h>
 #include <string.h>
+#include <stdio.h>
 
 #define CELL_WIDTH 12
 #define CELL_HEIGHT 12
@@ -20,6 +21,8 @@
 
 #define CELL_COLOR BLACK
 #define BG_COLOR WHITE
+#define TEXT_COLOR BLUE
+#define TEXT_SIZE 20
 
 #define KEY_PLUS KEY_EQUAL
 
@@ -137,6 +140,15 @@ int main()
     ClearBackground(BG_COLOR);
     
     DrawCells();
+
+    char info[15];
+    sprintf(info, "Speed: %.5f", nextGenInterval);
+    DrawText(info, 10, 10, TEXT_SIZE, TEXT_COLOR);
+
+    if (pause)
+    {
+      DrawText("Paused", 10, 10 + TEXT_SIZE, TEXT_SIZE, TEXT_COLOR);
+    }
 
     if (!pause)
     {
