@@ -5,5 +5,6 @@ Simple game using raylib
 ## Build
 ```console
 $ make
-$ .\gol.exe
+$ ./gol
+$ .\gol.exe # or if on Windows
 ```
