@@ -87,16 +87,17 @@ int main()
       pause = !pause;
     }
 
-    if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
     {
-      Vector2 pos = GetMousePosition();
-      grid[(int) pos.x / CELL_WIDTH][(int) pos.y / CELL_HEIGHT] = CELL_LIVE;
     }
 
-    if (IsMouseButtonDown(MOUSE_RIGHT_BUTTON))
+    if (IsMouseButtonDown(MOUSE_LEFT_BUTTON) || IsMouseButtonDown(MOUSE_RIGHT_BUTTON))
     {
       Vector2 pos = GetMousePosition();
-      grid[(int) pos.x / CELL_WIDTH][(int) pos.y / CELL_HEIGHT] = CELL_DEAD;
+      if (pos.x * pos.y >= 0 && pos.x < SCREEN_WIDTH && pos.y < SCREEN_HEIGHT)
+      {
+	grid[(int) pos.x / CELL_WIDTH][(int) pos.y / CELL_HEIGHT]
+	  = IsMouseButtonDown(MOUSE_LEFT_BUTTON) ? CELL_LIVE : CELL_DEAD;
+      }
     }
 
     BeginDrawing();
