@@ -102,7 +102,7 @@ int main()
       frame = 1;
     }
 
-    if (IsKeyPressed('-'))
+    if (IsKeyPressed(KEY_MINUS))
     {
       if (nextGenInterval + NEXT_GEN_INTERVAL_STEP <= NEXT_GEN_INTERVAL_MAX)
       {
