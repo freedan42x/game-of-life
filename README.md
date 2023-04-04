@@ -15,3 +15,5 @@ $ .\gol.exe # or if on Windows
 `Space` - Pause/Resume \
 `+`/`-` - Change speed \
 `R` - Restart
+
+![](preview.gif)
