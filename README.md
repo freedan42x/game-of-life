@@ -16,4 +16,5 @@ $ .\gol.exe # or if on Windows
 `+`/`-` - Change speed \
 `R` - Restart
 
-![](preview.gif)
+Preview:
+![Preview](preview.gif)
